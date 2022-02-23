@@ -3,12 +3,15 @@ package main
 import "fmt"
 
 func main() {
-	var a int
-	var b string
+	var a int = 3
 
-	a = 1
-	b = "Hello World!"
+	switch a {
+	case 1:
+		fmt.Println("a is 1")
+	case 2:
+		fmt.Println("a is 2")
+	case 3:
+		fmt.Println("a is 3")
+	}
 
-	fmt.Println(a)
-	fmt.Println(b)
 }
