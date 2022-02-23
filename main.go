@@ -3,11 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	sum, i := 0, 0
+	var a int
+	var b string
 
-	for i < 10{
-		sum += i
-		i++
-	}
-	fmt.Println(sum)
+	a = 1
+	b = "Hello World!"
+
+	fmt.Println(a)
+	fmt.Println(b)
 }
