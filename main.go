@@ -1,12 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func multiply(w, h int) (int, int) {
-	return w * 2, h * 2
+func displayInt(s string) {
+	if v, err := strconv.Atoi(s); err != nil {
+		fmt.Printf("%s is not a integer.\n", s)
+	} else {
+		fmt.Printf("The value is %d\n", v)
+	}
 }
 
 func main() {
-	w, h := multiply(3, 4)
-	fmt.Println(w, h)
+	displayInt("two")
+	displayInt("2")
 }
