@@ -3,17 +3,22 @@ package main
 import "fmt"
 
 func main() {
-	var a int = 1
 
-	switch a {
-	case 1:
-		fmt.Println("a is 1")
-		fallthrough
-	case 2:
-		fmt.Println("a is 2")
-		fallthrough
-	case 3:
-		fmt.Println("a is 3")
+	x := 7
+
+	table := [][]int{{1, 5, 9}, {2, 6, 5, 13}, {5, 3, 7, 4}}
+	found := false
+
+	for row := 0; row < len(table); row++ {
+		for col := 0; col < len(table[row]); col++ {
+			if table[row][col] == x {
+				found = true
+				fmt.Printf("found %d(row:%d, col:%d)\n", x, row, col)
+				break
+			}
+		}
+		if found {
+			break
+		}
 	}
-
 }
