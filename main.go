@@ -1,12 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func f1() {
-	for i := 0; i < 5; i++ {
-		defer fmt.Printf("%d ", i)
+func makeSuffix(suffix string) func(string) string {
+	return func(name string) string {
+		if !strings.HasSuffix(name, suffix) {
+			return name + suffix
+		}
+		return name
 	}
 }
+
 func main() {
-	f1()
+	addZip := makeSuffix(".zip")
+	addTgz := makeSuffix(".tar.gz")
+	fmt.Println(addZip("test1"))
+	fmt.Println(addTgz("test2"))
 }
