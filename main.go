@@ -3,20 +3,13 @@ package main
 import (
 	"fmt"
 	"strings"
+	"unicode"
 )
 
-func makeSuffix(suffix string) func(string) string {
-	return func(name string) string {
-		if !strings.HasSuffix(name, suffix) {
-			return name + suffix
-		}
-		return name
-	}
-}
-
 func main() {
-	addZip := makeSuffix(".zip")
-	addTgz := makeSuffix(".tar.gz")
-	fmt.Println(addZip("test1"))
-	fmt.Println(addTgz("test2"))
+	f := func(c rune) bool {
+		return unicode.Is(unicode.Hangul, c)
+	}
+	fmt.Println(strings.IndexFunc("Hello, 월드", f))
+	fmt.Println(strings.IndexFunc("Hello World", f))
 }
