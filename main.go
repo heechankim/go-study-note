@@ -5,17 +5,21 @@ import (
 )
 
 func main() {
-	var a [5]int
-	b := [3]int{1, 2, 3}
-	c := [3]int{1, 2}
-	d := [...]int{4, 5, 6, 7, 8}
-	e := [3][3]int{
-		{1, 2, 3},
+	var a []int
+	b := []int{}
+	c := []int{1, 2, 3}
+	d := [][]int{
+		{1, 2},
 		{3, 4, 5},
 	}
-	fmt.Printf("%-10T %d %v\n", a, len(a), a)
-	fmt.Printf("%-10T %d %v\n", b, len(b), b)
-	fmt.Printf("%-10T %d %v\n", c, len(c), c)
-	fmt.Printf("%-10T %d %v\n", d, len(d), d)
-	fmt.Printf("%-10T %d %v\n", e, len(e), e)
+	e := make([]int, 0)
+	f := make([]int, 3, 5)
+
+
+	fmt.Printf("%-10T %d %d %v\n", a, len(a), cap(a), a)
+	fmt.Printf("%-10T %d %d %v\n", b, len(b), cap(b), b)
+	fmt.Printf("%-10T %d %d %v\n", c, len(c), cap(c), c)
+	fmt.Printf("%-10T %d %d %v\n", d, len(d), cap(d), d)
+	fmt.Printf("%-10T %d %d %v\n", e, len(e), cap(e), e)
+	fmt.Printf("%-10T %d %d %v\n", f, len(f), cap(f), f)
 }
