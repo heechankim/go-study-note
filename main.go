@@ -1,12 +1,13 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
 	numbers := []int{3, 4, 5, 7, 8, 4, 6, 8, 32, 4}
-	for index, value := range numbers {
-		fmt.Println(index, value)
+	sum := 0
+	for _, value := range numbers {
+		sum += value
 	}
+
+	fmt.Println("sum: ", sum)
 }
