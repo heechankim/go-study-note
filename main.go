@@ -4,9 +4,13 @@ import "fmt"
 
 func main() {
 
-	p := new(int)
-	*p = 1
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	multiply(numbers, 5)
+	fmt.Println(numbers)
+}
 
-	fmt.Println(p)
-	fmt.Println(*p)
+func multiply(numbers []int, factor int) {
+	for i := range numbers {
+		numbers[i] *= factor
+	}
 }
