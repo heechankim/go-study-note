@@ -4,19 +4,9 @@ import "fmt"
 
 func main() {
 
-	var p *int
-	var pp **int
-	i := 1
-	p = &i
-	pp = &p
-	fmt.Println(i, *p, **pp)
+	p := new(int)
+	*p = 1
 
-	i += 1
-	fmt.Println(i, *p, **pp)
-
-	*p++
-	fmt.Println(i, *p, **pp)
-
-	**pp++
-	fmt.Println(i, *p, **pp)
+	fmt.Println(p)
+	fmt.Println(*p)
 }
