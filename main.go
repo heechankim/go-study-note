@@ -2,20 +2,14 @@ package main
 
 import "fmt"
 
-type Item struct {
-	name string
-	price float64
-	quan int
-}
-
-func (t Item) Cost() float64 {
-	return t.price * float64(t.quan)
-}
+type quantity int
+type dozen []quantity
 
 func main() {
+	var d dozen
 
-	shirt := Item{name: "Shirt", price: 25000, quan: 3}
-
-	fmt.Println(shirt.Cost())
-
+	for i := quantity(1); i <= 12; i++ {
+		d = append(d, i)
+	}
+	fmt.Println(d)
 }
