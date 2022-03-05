@@ -3,13 +3,19 @@ package main
 import "fmt"
 
 type quantity int
-type dozen []quantity
+type costCalculator func(quantity, float64) float64
+
+func describe(q quantity, price float64, c costCalculator) {
+	fmt.Printf("quantity: %d, price: %0.0f, cost: %0.0f\n",
+		q, price, c(q, price))
+}
 
 func main() {
-	var d dozen
+	var offBy10Percent costCalculator
 
-	for i := quantity(1); i <= 12; i++ {
-		d = append(d, i)
+	offBy10Percent = func(q quantity, price float64) float64 {
+		return float64(q) * price * 0.9
 	}
-	fmt.Println(d)
+
+	describe(3, 10000, offBy10Percent)
 }
