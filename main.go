@@ -2,20 +2,25 @@ package main
 
 import "fmt"
 
-type quantity int
-type costCalculator func(quantity, float64) float64
-
-func describe(q quantity, price float64, c costCalculator) {
-	fmt.Printf("quantity: %d, price: %0.0f, cost: %0.0f\n",
-		q, price, c(q, price))
+type rect struct {
+	w, h float64
 }
 
 func main() {
-	var offBy10Percent costCalculator
+	r1 := rect{1, 2}
+	r2 := new(rect)
+	r2.w, r2.h = 3, 4
+	r3 := &rect{}
+	r4 := &rect{5, 6}
 
-	offBy10Percent = func(q quantity, price float64) float64 {
-		return float64(q) * price * 0.9
-	}
+	fmt.Printf("%p \n\n", &r1)
 
-	describe(3, 10000, offBy10Percent)
+	fmt.Printf("%p \n", &r2)
+	fmt.Printf("%p \n\n", r2)
+
+	fmt.Printf("%p \n", &r3)
+	fmt.Printf("%p \n\n", r3)
+
+	fmt.Printf("%p \n", &r4)
+	fmt.Printf("%p \n\n", r4)
 }
