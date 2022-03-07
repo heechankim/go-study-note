@@ -17,6 +17,10 @@ type DiscountItem struct {
 	discountRate float64
 }
 
+func (t DiscountItem) Cost() float64 {
+	return t.Item.Cost() * (1.0 - t.discountRate/100)
+}
+
 func main() {
 	shoes := Item{"shoes", 30000, 2}
 
@@ -26,4 +30,5 @@ func main() {
 	}
 	fmt.Println(shoes.Cost())
 	fmt.Println(eventShoes.Cost())
+	fmt.Println(eventShoes.Item.Cost())
 }
