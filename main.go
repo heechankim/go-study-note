@@ -2,26 +2,28 @@ package main
 
 import "fmt"
 
-type Option struct {
-	name string
-	value string
-}
-
 type Item struct {
 	name string
 	price float64
 	quantity int
-	Option
+}
+
+func (t Item) Cost() float64 {
+	return t.price * float64(t.quantity)
+}
+
+type DiscountItem struct {
+	Item
+	discountRate float64
 }
 
 func main() {
-	shoes := Item{"shoes", 30000, 2,
-		Option{"color", "red"}}
+	shoes := Item{"shoes", 30000, 2}
 
-	fmt.Println(shoes)
-
-	fmt.Println(shoes.name)
-
-	fmt.Println(shoes.Option.name)
-	fmt.Println(shoes.value)
+	eventShoes := DiscountItem {
+		Item{"shoes2", 50000, 3},
+		10.00,
+	}
+	fmt.Println(shoes.Cost())
+	fmt.Println(eventShoes.Cost())
 }
