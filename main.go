@@ -2,23 +2,39 @@ package main
 
 import "fmt"
 
-type shaper interface {
-	area() float64
+type Coster interface {
+	Cost() float64
 }
 
-func describe(s shaper) {
-	fmt.Println("area: ", s.area())
+func displayCost(c Coster) {
+	fmt.Println("cost: ", c.Cost())
 }
 
-type rect struct {
-	width, height float64
+type Item struct {
+	name string
+	price float64
+	quantity int
 }
 
-func (r rect) area() float64 {
-	return r.width * r.height
+func (t Item) Cost() float64 {
+	return t.price * float64(t.quantity)
+}
+
+type DiscountItem struct {
+	Item
+	discountRate float64
+}
+
+func (t DiscountItem) Cost() float64 {
+	return t.Item.Cost() * (1.0 - t.discountRate/100)
 }
 
 func main() {
-	r := rect{3, 4}
-	describe(r)
+	shoes := Item{"shoes", 30000, 2}
+	eventShoes := DiscountItem{
+		Item{"eventShoes", 50000, 3},
+		10.00,
+	}
+	displayCost(shoes)
+	displayCost(eventShoes)
 }
