@@ -58,14 +58,24 @@ func (r Rental) Cost() float64 {
 	return r.feePerDay * float64(r.ToDays() * r.periodLength)
 }
 
+type Items []Coster
+
+func (ts Items) Cost() (c float64) {
+	for _, t := range ts {
+		c += t.Cost()
+	}
+	return
+}
+
+
 func main() {
-	shoes := Item{"shoes", 30000, 2}
+	shoes := Item{"shoes", 25000, 3}
 	eventShoes := DiscountItem{
 		Item{"eventShoes", 50000, 3},
 		10.00,
 	}
-	video := Rental{"movie", 1000, 3, Weeks}
-	displayCost(shoes)
-	displayCost(eventShoes)
-	displayCost(video)
+	video := Rental{"movie", 1000, 3, Days}
+
+	items := Items{shoes, eventShoes, video}
+	displayCost(items)
 }
