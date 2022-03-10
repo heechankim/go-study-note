@@ -8,21 +8,26 @@ import (
 func main() {
 	fmt.Println("Start main function", time.Now())
 
-	go long()
-	go short()
+	done := make(chan bool)
+	go long(done)
+	go short(done)
 
-	time.Sleep(5 * time.Second)
+	<-done
+	<-done
+
 	fmt.Println("End main function", time.Now())
 }
 
-func long() {
+func long(d chan bool) {
 	fmt.Println("-- Start long function", time.Now())
 	time.Sleep(3 * time.Second)
 	fmt.Println("-- End long function", time.Now())
+	d <- true
 }
 
-func short() {
+func short(done chan bool) {
 	fmt.Println("-- Start short function", time.Now())
 	time.Sleep(1 * time.Second)
 	fmt.Println("-- End short function", time.Now())
+	done <- true
 }
