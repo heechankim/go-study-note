@@ -1,84 +1,82 @@
 package main
 
-import "fmt"
-
-type shareMap struct {
-	m map[string]interface{}
-	c chan command
-}
-
-type command struct {
-	action int
-	key string
-	value interface{}
-	result chan<- interface{}
-}
-
-const (
-	set = iota
-	get
-	remove
-	count
+import (
+	"fmt"
+	"strconv"
 )
 
-func (sm shareMap) Set(k string, v interface{}) {
-	sm.c <- command{action: set, key: k, value: v}
-}
+const (
+	JOB_COUNT = 10
+	BUF_SIZE = 5
+)
 
-func (sm shareMap) Get(k string) (interface{}, bool) {
-	callback := make(chan interface{})
-	sm.c <- command{action: get, key: k, result: callback}
-	result := (<-callback).([2]interface{})
-	return result[0], result[1].(bool)
+type Job struct {
+	name, log string
 }
-func (sm shareMap) Remove(k string) {
-	sm.c <- command{action: remove, key: k}
-}
-func (sm shareMap) Count() int {
-	callback := make(chan interface{})
-	sm.c <- command{action: count, result: callback}
-	return (<-callback).(int)
-}
-
-func (sm shareMap) run() {
-	for cmd := range sm.c {
-		switch cmd.action {
-		case set:
-			sm.m[cmd.key] = cmd.value
-		case get:
-			v, ok := sm.m[cmd.key]
-			cmd.result <- [2]interface{}{v, ok}
-		case remove:
-			delete(sm.m, cmd.key)
-		case count:
-			cmd.result <- len(sm.m)
-		}
-	}
-}
-
-func NewMap() shareMap {
-	sm := shareMap{
-		m: make(map[string]interface{}),
-		c: make(chan command),
-	}
-	go sm.run()
-
-	return sm
+type JobHandler func(Job) Job
+func (j Job) String() string {
+	return "job name: " + j.name + "\n[log]\n" + j.log
 }
 
 func main() {
-	m := NewMap()
-
-	m.Set("foo", "bar")
-
-	t, ok := m.Get("foo")
-
-	if ok {
-		bar := t.(string)
-		fmt.Println("bar: ", bar)
+	done := doLast(doThird(doSecond(doFirst(prepare()))))
+	for d := range done {
+		fmt.Println(d)
 	}
+}
 
-	m.Remove("foo")
+func prepare() <-chan Job {
+	out := make(chan Job, BUF_SIZE)
+	go func() {
+		for i := 0; i < JOB_COUNT; i++ {
+			out <- Job{name: strconv.Itoa(i)}
+		}
+		close(out)
+	}()
+	return out
+}
 
-	fmt.Println("Count: ", m.Count())
+func doFirst(in <-chan Job) <-chan Job {
+	out := make(chan Job, cap(in))
+	go func() {
+		for job := range in {
+			job.log += "first stage\n"
+			out <- job
+		}
+		close(out)
+	}()
+	return out
+}
+func doSecond(in <-chan Job) <-chan Job {
+	out := make(chan Job, cap(in))
+	go func() {
+		for job := range in {
+			job.log += "second stage\n"
+			out <- job
+		}
+		close(out)
+	}()
+	return out
+}
+func doThird(in <-chan Job) <-chan Job {
+	out := make(chan Job, cap(in))
+	go func() {
+		for job := range in {
+			job.log += "third stage\n"
+			out <- job
+		}
+		close(out)
+	}()
+	return out
+}
+func doLast(in <-chan Job) <-chan Job {
+	out := make(chan Job, cap(in))
+	go func() {
+		for job := range in {
+			job.log += "last stage\n"
+			out <- job
+		}
+		close(out)
+	}()
+	return out
 }
