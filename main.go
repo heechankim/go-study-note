@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
-	"errors"
 	"math"
 )
 
 func Sqrt(f float64) (float64, error) {
 	if f < 0 {
-		return 0, errors.New("Cannot use negative integer")
+		return 0, fmt.Errorf("Cannot use negative integer (%g)", f)
 	}
 	return math.Sqrt(f), nil
 }
