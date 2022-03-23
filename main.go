@@ -1,22 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"strings"
+)
 
-func badCall() {
-	panic("bad end")
+func TitleCase(s string) string {
+	return strings.Title(s)
 }
 
-func test() {
-	defer func() {
-		if e := recover(); e != nil {
-			fmt.Printf("Panicking %s\r\n", e)
-		}
-	}()
-	badCall()
-	fmt.Printf("After bad Call\r\n")
-}
 func main() {
-	fmt.Println("Calling test")
-	test()
-	fmt.Println("Test Completed")
+	caption := "go is an open source programming language"
+
+	title := TitleCase(caption)
+	fmt.Println(title)
+
+	titleFuncValue := reflect.ValueOf(TitleCase)
+	values := titleFuncValue.Call([]reflect.Value{reflect.ValueOf(caption)})
+
+	title = values[0].String()
+	fmt.Println(title)
 }
