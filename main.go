@@ -1,27 +1,22 @@
 package main
 
-import (
-	"fmt"
-	"log"
-)
+import "fmt"
 
-func protect(g func()) {
+func badCall() {
+	panic("bad end")
+}
+
+func test() {
 	defer func() {
-		log.Println("done")
-
-		if err := recover(); err != nil {
-			log.Printf("run time panic: %v", err)
+		if e := recover(); e != nil {
+			fmt.Printf("Panicking %s\r\n", e)
 		}
 	}()
-	log.Println("start")
-	g()
+	badCall()
+	fmt.Printf("After bad Call\r\n")
 }
-
 func main() {
-	protect(func() {
-		fmt.Println(divide(1, 0))
-	})
-}
-func divide(a, b int) int {
-	return a / b
+	fmt.Println("Calling test")
+	test()
+	fmt.Println("Test Completed")
 }
