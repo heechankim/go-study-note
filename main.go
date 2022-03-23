@@ -1,15 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
-func main() {
-	fmt.Println(divide(1, 0))
-}
-func divide(a, b int) int {
+func protect(g func()) {
 	defer func() {
+		log.Println("done")
+
 		if err := recover(); err != nil {
-			fmt.Println(err)
+			log.Printf("run time panic: %v", err)
 		}
 	}()
+	log.Println("start")
+	g()
+}
+
+func main() {
+	protect(func() {
+		fmt.Println(divide(1, 0))
+	})
+}
+func divide(a, b int) int {
 	return a / b
 }
