@@ -1,24 +1,19 @@
 package main
 
-import (
-	"fmt"
-	"reflect"
-	"strings"
-)
+import "testing"
 
-func TitleCase(s string) string {
-	return strings.Title(s)
+func TestLenForMap(t *testing.T) {
+	v := map[string]int{"A": 1, "B":2}
+	actual, expected := Len(v), 2
+	if actual != expected {
+		t.Errorf("%d != %d", actual, expected)
+	}
 }
 
-func main() {
-	caption := "go is an open source programming language"
-
-	title := TitleCase(caption)
-	fmt.Println(title)
-
-	titleFuncValue := reflect.ValueOf(TitleCase)
-	values := titleFuncValue.Call([]reflect.Value{reflect.ValueOf(caption)})
-
-	title = values[0].String()
-	fmt.Println(title)
+func TestLenForString(t *testing.T) {
+	v := "one"
+	actual, expected := Len(v), 3
+	if actual != expected {
+		t.Errorf("%d != %d", actual, expected)
+	}
 }
