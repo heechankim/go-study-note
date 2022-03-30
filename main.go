@@ -10,5 +10,9 @@ func main() {
 		fmt.Fprintln(w, "Welcome!")
 	})
 
+	http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "about page")
+	})
+
 	http.ListenAndServe(":8080", nil)
 }
