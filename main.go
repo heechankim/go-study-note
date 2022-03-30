@@ -1,19 +1,14 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"net/http"
+)
 
-func TestLenForMap(t *testing.T) {
-	v := map[string]int{"A": 1, "B":2}
-	actual, expected := Len(v), 2
-	if actual != expected {
-		t.Errorf("%d != %d", actual, expected)
-	}
-}
+func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Welcome!")
+	})
 
-func TestLenForString(t *testing.T) {
-	v := "one"
-	actual, expected := Len(v), 3
-	if actual != expected {
-		t.Errorf("%d != %d", actual, expected)
-	}
+	http.ListenAndServe(":8080", nil)
 }
