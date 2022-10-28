@@ -26,5 +26,29 @@ func main() {
 <hr>
 
 #### Code
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const (
+		first  = 0
+		second = 1
+		third  = 2
+	)
+
+	fmt.Println(first)
+	fmt.Println(second)
+	fmt.Println(third)
+}
+
+```
 #### Result
+```
+1
+2
+3
+```
 #### Lessions
+- Go에서 열거형의 정의 : 1씩 증가하는 상수의 모음
