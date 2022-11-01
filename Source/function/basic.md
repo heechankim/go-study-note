@@ -51,3 +51,27 @@ Input String is Chan
 ```
 ### Lessons
 - 매개변수의 마지막 자리에 '...자료형'의 형태로 개수가 정해지지 않은 가변 인자를 배열의 형태로 받음.
+---
+### Code
+```go
+package main
+
+import "fmt"
+
+func twoTimes(a, b int) (int, int) {
+	return a * 2, b * 2
+}
+
+func main() {
+	result1, result2 := twoTimes(3, 4)
+
+	fmt.Println("Result is", result1, ",", result2)
+}
+```
+### Result
+```
+Result is 6 , 8
+```
+### Lessons
+- 함수에서 값을 두개 이상 반환하는 경우 괄호를 사용한다.
+- 일반적으로 라이브러리의 함수들은 값을 두개 반환하는데, 함수의 수행 결과 값과 에러 상태를 반환한다.
