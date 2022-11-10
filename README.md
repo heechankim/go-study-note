@@ -19,3 +19,15 @@
 - [매개변수의 전달](Source/function/call_by.md)
 - [defer 키워드](Source/function//defer.md)
 - [클로저](Source/function/closure.md)
+
+**배열, 슬라이스**
+
+- [배열 기본](Source/sequence/array.md)
+- [for range](Source/sequence/for_range.md)
+- [슬라이스](Source/sequence/slice.md)
+- [슬라이싱](Source/sequence/slicing.md)
+
+**맵**
+
+- [맵 기본](Source/map/map.md)
+- [맵 키 참조](Source/map/findkey.md)
