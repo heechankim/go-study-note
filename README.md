@@ -36,3 +36,8 @@
 
 - [포인터 기본](Source/pointer/pointer.md)
 
+**OOP**
+
+- [Go에서 객체생성](Source/oop/1_object.md)
+- [사용자 정의 타입](Source/oop/2_custom_type.md)
+- [구조체 기본](Source/oop/3_struct.md)
