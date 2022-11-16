@@ -41,3 +41,6 @@
 - [Go에서 객체생성](Source/oop/1_object.md)
 - [사용자 정의 타입](Source/oop/2_custom_type.md)
 - [구조체 기본](Source/oop/3_struct.md)
+- [임베디드 필드](Source/oop/4_embedded_struct.md)
+- [메서드 재사용](Source/oop/5_method_reuse.md)
+- [정보은닉과 생성함수](Source/oop/6_generator.md)
