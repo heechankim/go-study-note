@@ -50,7 +50,7 @@ area : 28.26
 - 보통 인터페이스는 메서드이름 + er을 붙여 네이밍하며, 적어도 한개 많게는 세개 정도의 메서드를 포함하는 짧은 단위로 만든다.
 
 ---
-## anonymous interface
+## Anonymous Interface
 ### Code
 ```go
 package main
@@ -83,3 +83,38 @@ Age is 25
 ```
 ### Lessons
 - 익명 인터페이스를 통해 show 메서드를 가진 타입을 매개변수로 전달할 수 있음.
+
+---
+
+# Empty Interface
+
+### Code
+```go
+package main
+
+import "fmt"
+
+func display(s interface{}) {
+	fmt.Println(s)
+}
+
+type Person struct {
+	name string
+	age  int
+}
+
+func main() {
+	p := Person{"kim", 25}
+	display(p)
+	display("Hi")
+	display(3.141592)
+}
+```
+### Result
+```
+{kim 25}
+Hi
+3.141592
+```
+### Lessons
+- 빈 인터페이스를 통해 어떤 타입이든 매개변수로 전달할 수 있음.
