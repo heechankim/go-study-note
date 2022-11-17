@@ -48,3 +48,35 @@ area : 28.26
 - 인터페이스는 객체의 동작 방식을 추상적으로 정의함.
 - 덕 타이핑 방식으로 객체의 변수나 메서드 집합이 객체를 결정함.
 - 보통 인터페이스는 메서드이름 + er을 붙여 네이밍하며, 적어도 한개 많게는 세개 정도의 메서드를 포함하는 짧은 단위로 만든다.
+
+---
+
+
+### Code
+```go
+package main
+
+import "fmt"
+
+func display(s interface{ show() }) {
+	s.show()
+}
+
+type Person struct {
+	name string
+	age  int
+}
+
+func (p Person) show() {
+	fmt.Println("Name is", p.name)
+	fmt.Println("Age is", p.age)
+}
+
+func main() {
+	p := Person{"kim", 25}
+	display(p)
+}
+```
+### Result
+
+### Lessons
