@@ -50,8 +50,7 @@ area : 28.26
 - 보통 인터페이스는 메서드이름 + er을 붙여 네이밍하며, 적어도 한개 많게는 세개 정도의 메서드를 포함하는 짧은 단위로 만든다.
 
 ---
-
-
+## anonymous interface
 ### Code
 ```go
 package main
@@ -78,5 +77,9 @@ func main() {
 }
 ```
 ### Result
-
+```
+Name is kim
+Age is 25
+```
 ### Lessons
+- 익명 인터페이스를 통해 show 메서드를 가진 타입을 매개변수로 전달할 수 있음.
