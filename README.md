@@ -46,3 +46,7 @@
 - [정보은닉과 생성함수](Source/oop/6_generator.md)
 - [인터페이스](Source/oop/7_interface.md)
 - [다형성](Source/oop/8_%20polymorphism.md)
+
+**병행 처리**
+
+- [고루틴](Source/concurrency/1_goroutine.md)
