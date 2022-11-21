@@ -5,6 +5,7 @@
 - [Hello World 예제](Source/01_helloworld.md)
 - [변수의 선언](Source/02_Variables.md)
 - [상수와 열거형](Source/03_const_enum.md)
+- [string 타입과 rune 타입](Source/string/string.md)
 
 **흐름제어**
 
