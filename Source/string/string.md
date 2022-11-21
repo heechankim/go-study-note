@@ -66,3 +66,39 @@ C
 - 인덱스 연산자를 사용하여 문자열 내부의 바이트에 접근할 수 있다.
 
 ---
+
+# string to []rune
+
+### Code
+```go
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func main() {
+	var string1 = "ABC"
+
+	var rune1 = []rune(string1)
+
+	fmt.Println(reflect.TypeOf(rune1))
+	fmt.Println(reflect.TypeOf(rune1[0]))
+	for i := 0; i < len(rune1); i++ {
+		fmt.Printf("%c \n", rune1[i])
+	}
+}
+```
+
+### Result
+```
+[]int32
+int32
+A 
+B 
+C
+```
+### Lessons
+- string 타입은 []uint8 이다.
+- 유니코드 문자를 다룰 수 있도록 []rune 타입으로 변환하여 문자열을 다룬다.
